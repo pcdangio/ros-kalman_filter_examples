@@ -1,13 +1,15 @@
 #include <kalman_filter/ukfa.hpp>
 
-#include <chrono>
-#include <iostream>
-#include <iomanip>
+#include <chrono>       // Needed for timing.
+#include <iostream>     // Needed for console ouput.
+#include <iomanip>      // Needed for formatting console output.
 
+// Create UKF model.
 class model_t
     : public kalman_filter::ukfa_t
 {
 public:
+    // Configure n_variables / n_observers below.
     model_t()
         :ukfa_t(30,30)
     {
@@ -17,18 +19,20 @@ public:
 private:
     void state_transition(const Eigen::VectorXd& xp, const Eigen::VectorXd& q, Eigen::VectorXd& x) const override
     {
-        x = xp + q;
+        x = q;
     }
     void observation(const Eigen::VectorXd& x, const Eigen::VectorXd& r, Eigen::VectorXd& z) const override
     {
-        z = x + r;
+        z = r;
     }
 };
 
 int32_t main(int32_t argc, char** argv)
 {
+    // Specify number of runs.
     uint32_t n_runs = 10000;
 
+    // Create UKF object.
     model_t ukf;
 
     // Start timing.
@@ -48,7 +52,17 @@ int32_t main(int32_t argc, char** argv)
     // Stop timing.
     auto stop_time = std::chrono::high_resolution_clock::now();
 
+    // Calculate time difference.
     std::chrono::duration<double_t> delta = stop_time - start_time;
 
-    std::cout << std::fixed << std::setprecision(10) << delta.count() / static_cast<double_t>(n_runs) << std::endl;
+    // Calculate average iteration time.
+    double_t average_time = delta.count() / static_cast<double_t>(n_runs);
+
+    // Calculate max theoretical rate.
+    double_t max_rate = 1.0 / average_time;
+
+    // Print to console.
+    std::cout << "UKFA with [" << ukf.n_variables() << "] variables and [" << ukf.n_observers() << "] observers at [" << n_runs << "] runs:" << std::endl;
+    std::cout << std::fixed << std::setprecision(10) << average_time << " sec average" << std::endl;
+    std::cout << max_rate << " Hz max rate" << std::endl;
 }
