@@ -133,21 +133,30 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_kf_simple src/kf/simple/main.cpp)
+set_target_properties(${PROJECT_NAME}_kf_simple PROPERTIES OUTPUT_NAME kf_simple PREFIX "")
+target_link_libraries(${PROJECT_NAME}_kf_simple
+  ${catkin_LIBRARIES}
+)
 
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+add_executable(${PROJECT_NAME}_ukf_profile src/ukf/profile/main.cpp)
+set_target_properties(${PROJECT_NAME}_ukf_profile PROPERTIES OUTPUT_NAME ukf_profile PREFIX "")
+target_link_libraries(${PROJECT_NAME}_ukf_profile
+  ${catkin_LIBRARIES}
+)
+
+add_executable(${PROJECT_NAME}_ukfa_profile src/ukfa/profile/main.cpp)
+set_target_properties(${PROJECT_NAME}_ukfa_profile PROPERTIES OUTPUT_NAME ukfa_profile PREFIX "")
+target_link_libraries(${PROJECT_NAME}_ukfa_profile
+  ${catkin_LIBRARIES}
+)
+
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_kf_simple
-  ${catkin_LIBRARIES}
-)
+
 
 #############
 ## Install ##
