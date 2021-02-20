@@ -132,25 +132,25 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_kf_simple src/kf/simple/main.cpp)
+add_executable(${PROJECT_NAME}_kf_simple src/kf/simple.cpp)
 set_target_properties(${PROJECT_NAME}_kf_simple PROPERTIES OUTPUT_NAME kf_simple PREFIX "")
 target_link_libraries(${PROJECT_NAME}_kf_simple
   ${catkin_LIBRARIES}
 )
 
-add_executable(${PROJECT_NAME}_ukf_profile src/ukf/profile/main.cpp)
+add_executable(${PROJECT_NAME}_ukf_profile src/ukf/profile.cpp)
 set_target_properties(${PROJECT_NAME}_ukf_profile PROPERTIES OUTPUT_NAME ukf_profile PREFIX "")
 target_link_libraries(${PROJECT_NAME}_ukf_profile
   ${catkin_LIBRARIES}
 )
 
-add_executable(${PROJECT_NAME}_ukf_simple src/ukf/simple/main.cpp)
+add_executable(${PROJECT_NAME}_ukf_simple src/ukf/simple.cpp)
 set_target_properties(${PROJECT_NAME}_ukf_simple PROPERTIES OUTPUT_NAME ukf_simple PREFIX "")
 target_link_libraries(${PROJECT_NAME}_ukf_simple
   ${catkin_LIBRARIES}
 )
 
-add_executable(${PROJECT_NAME}_ukfa_profile src/ukfa/profile/main.cpp)
+add_executable(${PROJECT_NAME}_ukfa_profile src/ukfa/profile.cpp)
 set_target_properties(${PROJECT_NAME}_ukfa_profile PROPERTIES OUTPUT_NAME ukfa_profile PREFIX "")
 target_link_libraries(${PROJECT_NAME}_ukfa_profile
   ${catkin_LIBRARIES}
