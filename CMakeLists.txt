@@ -144,6 +144,12 @@ target_link_libraries(${PROJECT_NAME}_ukf_profile
   ${catkin_LIBRARIES}
 )
 
+add_executable(${PROJECT_NAME}_ukf_simple src/ukf/simple/main.cpp)
+set_target_properties(${PROJECT_NAME}_ukf_simple PROPERTIES OUTPUT_NAME ukf_simple PREFIX "")
+target_link_libraries(${PROJECT_NAME}_ukf_simple
+  ${catkin_LIBRARIES}
+)
+
 add_executable(${PROJECT_NAME}_ukfa_profile src/ukfa/profile/main.cpp)
 set_target_properties(${PROJECT_NAME}_ukfa_profile PROPERTIES OUTPUT_NAME ukfa_profile PREFIX "")
 target_link_libraries(${PROJECT_NAME}_ukfa_profile
