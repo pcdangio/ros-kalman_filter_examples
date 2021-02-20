@@ -11,7 +11,7 @@ int32_t main(int32_t argc, char** argv)
     // It has the following observation model:
     // y = x
 
-    // Set up a new UKF that has a single state, a single input, and a single observer.
+    // Set up a new KF that has a single state, a single input, and a single observer.
     kalman_filter::kf_t kf(1,1,1);
 
     // Populate the model matrices accordingly.
